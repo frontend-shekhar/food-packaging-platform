@@ -1,0 +1,10 @@
+query pageType($slug: String) {
+  pageTypes(filters: { slug: { eq: $slug } }) {
+    data {
+      attributes {
+        slug
+        pageType
+      }
+    }
+  }
+}

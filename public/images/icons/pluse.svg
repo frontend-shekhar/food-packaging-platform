@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+  <rect width="800" height="300" fill="#F5F5F5" />
+  
+  <g>
+    <text x="50" y="50" font-size="24" font-weight="bold">Company Verification Documents</text>
+    <text x="50" y="80" font-size="16" fill="#8D8D8D">
+      These documents are gathered by the Mineramix KYC Team during your company
+      verification and approval process. You may choose to display these
+      documents on your public company profile.
+    </text>
+  </g>
+  
+  <g transform="translate(600, 50)">
+    <path d="M25 0 L50 25 L25 50 L0 25 Z" fill="#F72013" />
+    <text x="60" y="30" font-size="18" font-weight="bold" fill="#F72013">
+      Incomplete
+    </text>
+  </g>
+</svg>
