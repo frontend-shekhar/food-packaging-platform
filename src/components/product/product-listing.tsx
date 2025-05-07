@@ -5,48 +5,81 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Heart } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 // import { toast } from "@/components/ui/use-toast"
 import { motion } from "framer-motion";
 
-const featuredProducts = [
+const products = [
   {
     id: 1,
-    name: "Premium Wireless Headphones",
-    price: 199.99,
+    name: "Wireless Bluetooth Earbuds",
+    price: 59.99,
     image: "/placeholder.svg?height=400&width=400",
     category: "Electronics",
-    isNew: true,
-    isSale: false,
+    rating: 4.5,
   },
   {
     id: 2,
-    name: "Leather Crossbody Bag",
-    price: 89.99,
-    originalPrice: 129.99,
+    name: "Slim Fit Cotton T-Shirt",
+    price: 24.99,
     image: "/placeholder.svg?height=400&width=400",
-    category: "Accessories",
-    isNew: false,
-    isSale: true,
+    category: "Clothing",
+    rating: 4.2,
   },
   {
     id: 3,
-    name: "Smart Fitness Watch",
-    price: 149.99,
+    name: "Stainless Steel Water Bottle",
+    price: 19.99,
     image: "/placeholder.svg?height=400&width=400",
-    category: "Electronics",
-    isNew: true,
-    isSale: false,
+    category: "Home & Kitchen",
+    rating: 4.7,
   },
   {
     id: 4,
-    name: "Organic Cotton T-Shirt",
+    name: "Portable Bluetooth Speaker",
+    price: 79.99,
+    image: "/placeholder.svg?height=400&width=400",
+    category: "Electronics",
+    rating: 4.3,
+  },
+  {
+    id: 5,
+    name: "Yoga Exercise Mat",
+    price: 29.99,
+    image: "/placeholder.svg?height=400&width=400",
+    category: "Sports & Outdoors",
+    rating: 4.6,
+  },
+  {
+    id: 6,
+    name: "Ceramic Coffee Mug Set",
     price: 34.99,
     image: "/placeholder.svg?height=400&width=400",
-    category: "Clothing",
-    isNew: false,
-    isSale: false,
+    category: "Home & Kitchen",
+    rating: 4.4,
+  },
+  {
+    id: 7,
+    name: "Wireless Computer Mouse",
+    price: 24.99,
+    image: "/placeholder.svg?height=400&width=400",
+    category: "Electronics",
+    rating: 4.1,
+  },
+  {
+    id: 8,
+    name: "Scented Soy Candle",
+    price: 18.99,
+    image: "/placeholder.svg?height=400&width=400",
+    category: "Home & Kitchen",
+    rating: 4.8,
   },
 ];
 
@@ -65,8 +98,9 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-export default function FeaturedProducts() {
+export default function ProductListing() {
   const [wishlist, setWishlist] = useState<number[]>([]);
+  const [sortBy, setSortBy] = useState("featured");
 
   const toggleWishlist = (id: number) => {
     if (wishlist.includes(id)) {
@@ -88,32 +122,61 @@ export default function FeaturedProducts() {
     // })
   };
 
+  const sortedProducts = [...products].sort((a, b) => {
+    switch (sortBy) {
+      case "price-low":
+        return a.price - b.price;
+      case "price-high":
+        return b.price - a.price;
+      case "rating":
+        return b.rating - a.rating;
+      default:
+        return 0;
+    }
+  });
+
   return (
     <motion.section
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
       variants={container}
+      className="py-16"
     >
       <motion.div
         variants={item}
-        className="flex justify-between items-center mb-8"
+        className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8"
       >
-        <h2 className="text-3xl font-bold text-blue-800">Featured Products</h2>
-        <Button
-          variant="outline"
-          asChild
-          className="border-blue-800 text-blue-800 hover:bg-blue-50"
-        >
-          <Link href="/products">View All</Link>
-        </Button>
+        <h2 className="text-3xl font-bold text-blue-800">Popular Products</h2>
+
+        <div className="flex items-center gap-4 w-full sm:w-auto">
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="w-full sm:w-[180px] border-blue-200 focus:ring-blue-500">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="featured">Featured</SelectItem>
+              <SelectItem value="price-low">Price: Low to High</SelectItem>
+              <SelectItem value="price-high">Price: High to Low</SelectItem>
+              <SelectItem value="rating">Top Rated</SelectItem>
+            </SelectContent>
+          </Select>
+
+          <Button
+            variant="outline"
+            asChild
+            className="ml-auto border-blue-800 text-blue-800 hover:bg-blue-50"
+          >
+            <Link href="/products">View All</Link>
+          </Button>
+        </div>
       </motion.div>
 
       <motion.div
         variants={container}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
       >
-        {featuredProducts.map((product) => (
+        {sortedProducts.map((product) => (
           <motion.div key={product.id} variants={item}>
             <Card className="group overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow duration-300">
               <div className="relative h-64 bg-gray-100">
@@ -140,17 +203,9 @@ export default function FeaturedProducts() {
                   />
                 </button>
 
-                {product.isNew && (
-                  <Badge className="absolute top-3 left-3 bg-blue-600 text-white">
-                    New
-                  </Badge>
-                )}
-
-                {product.isSale && (
-                  <Badge className="absolute top-3 left-3 bg-orange-500 text-white">
-                    Sale
-                  </Badge>
-                )}
+                <div className="absolute bottom-3 left-3 bg-white px-2 py-1 rounded text-sm font-medium">
+                  ★ {product.rating}
+                </div>
               </div>
 
               <CardContent className="pt-4">
@@ -165,22 +220,17 @@ export default function FeaturedProducts() {
                     {product.name}
                   </h3>
                 </Link>
-                <div className="mt-2 flex items-center">
+                <div className="mt-2">
                   <span className="font-bold text-lg">
                     ${product.price.toFixed(2)}
                   </span>
-                  {product.originalPrice && (
-                    <span className="ml-2 text-gray-500 line-through text-sm">
-                      ${product.originalPrice.toFixed(2)}
-                    </span>
-                  )}
                 </div>
               </CardContent>
 
               <CardFooter className="pt-0">
                 <Button
                   onClick={() => addToCart(product.name)}
-                  className="w-full bg-blue-600 hover:bg-blue-700 transition-transform hover:scale-105 duration-200"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white transition-transform hover:scale-105 duration-200"
                 >
                   <ShoppingCart className="h-4 w-4 mr-2" />
                   Add to Cart

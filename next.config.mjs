@@ -5,6 +5,8 @@ const nextConfig = {
     domains: [
       "hebbkx1anhila5yf.public.blob.vercel-storage.com",
       "d2v0hgw1h0414j.cloudfront.net",
+      "placehold.co",
+      "via.placeholder.com",
     ],
   },
 };
