@@ -9,13 +9,14 @@ import { ProductCard } from "@/components/landing/product-card";
 import { QuoteForm } from "@/components/landing/quote-form";
 import Categories from "@/components/product/categories";
 import FeaturedProducts from "@/components/product/featured-products";
+import Footer from "@/components/product/Footer";
 import HeroSlider from "@/components/product/hero-slider";
 import Navbar from "@/components/product/navbar";
 import ProductListing from "@/components/product/product-listing";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white 2xl:pb-[100px] pb-[50px]">
+    <div className="min-h-screen bg-white">
       <div className="min-h-screen">
         <Navbar />
         <HeroSlider />
@@ -25,6 +26,7 @@ export default function Home() {
           <ProductListing />
         </div>
         {/* <Toaster /> */}
+        <Footer />
       </div>
     </div>
   );

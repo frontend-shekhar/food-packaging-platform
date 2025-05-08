@@ -13,7 +13,7 @@ const slides = [
     subtitle: "Future Of Sound",
     description: "Trusted by 750,000+ customers",
     buttonText: "Shop Now",
-    image: "/placeholder.svg?height=600&width=1200",
+    image: "/images/forgot.png",
     link: "/collections/audio",
   },
   {
@@ -22,7 +22,7 @@ const slides = [
     subtitle: "Track Your Fitness",
     description: "The perfect companion for your active lifestyle",
     buttonText: "Explore",
-    image: "/placeholder.svg?height=600&width=1200",
+    image: "/images/forgot.png",
     link: "/collections/watches",
   },
   {
@@ -31,7 +31,7 @@ const slides = [
     subtitle: "Immersive Audio",
     description: "Experience crystal clear sound quality",
     buttonText: "View Collection",
-    image: "/placeholder.svg?height=600&width=1200",
+    image: "/images/forgot.png",
     link: "/collections/headphones",
   },
 ];
@@ -88,7 +88,7 @@ export default function HeroSlider() {
                 transition={{ duration: 0.8, ease: "easeInOut" }}
                 className="absolute inset-0"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/80 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/20 z-10" />
                 <Image
                   src={slide.image || "/placeholder.svg"}
                   alt={slide.title}
@@ -98,7 +98,7 @@ export default function HeroSlider() {
                 />
                 <motion.div
                   className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-4"
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >

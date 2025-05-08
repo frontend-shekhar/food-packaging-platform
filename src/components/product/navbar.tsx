@@ -23,7 +23,9 @@ export default function Navbar() {
       <div className="container flex h-16 items-center justify-between px-5">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold text-orange-500">glozin</span>
+            <div className="w-full h-10 px-3 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition duration-500">
+              <span className="text-xl font-bold">Eccomerce</span>
+            </div>
           </Link>
 
           <NavigationMenu className="hidden md:flex">
